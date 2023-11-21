@@ -1,7 +1,9 @@
 clear;
+% Я не делал выводы изображений на экран для экономии (все изображения и
+% так сохраняются в репозиторий)
 
 % 2. Чтение исходного изображения
-bogdan = imread('C:\Users\stepa\Desktop\ITMO\DIP\bogdan.jpg');
+bogdan = imread('C:\Users\stepa\Desktop\ITMO\DIP\DIP_using_MATLAB\bogdan.jpg');
 
 % 3. Отображение
 % imshow(bogdan); pause;
@@ -44,7 +46,56 @@ end
 
 % 12. Квантование полутонового изображения
 for i = [4 16 32 64 128]
-    
+    adr = ['Quantiz/' int2str(i) '.jpg'];
+    imwrite(mat2gray(imquantize(bogdan_grey, linspace(0, 255, i+1))), adr);
 end
 
+% 13. Вырезание области
+adr = 'Crop/cropped_bogdan.jpg';
+imwrite(imcrop(bogdan_grey,centerCropWindow2d(size(bogdan_grey),[100 100])), adr);
 
+% 14. Значения соседей
+N1 = [bogdan_grey(20,17) ...
+    bogdan_grey(22,17) ...
+    bogdan_grey(21,18) ...
+    bogdan_grey(21,16) ...
+    ];
+N2 = [bogdan_grey(14,10) ...
+    bogdan_grey(16,12) ...
+    bogdan_grey(14,12) ...
+    bogdan_grey(16,10) ...
+    ];
+N3 = [bogdan_grey(18,89) ...
+    bogdan_grey(19,89) ...
+    bogdan_grey(20,89) ...
+    bogdan_grey(18,88) ...
+    bogdan_grey(20,88) ...
+    bogdan_grey(18,87) ...
+    bogdan_grey(19,87) ...
+    bogdan_grey(20,87) ...
+    ];
+
+% 15. Средний уровень яркости
+mean_brightness = mean(mean(bogdan_grey));
+
+% 16. Нанесение меток
+rectsize = 20;
+m(:, :, 1) = imcrop(bogdan_grey, [0 0 rectsize rectsize]);
+m(:, :, 2) = imcrop(bogdan_grey, [0 801-rectsize rectsize rectsize]);
+m(:, :, 3) = imcrop(bogdan_grey, [801-rectsize 801-rectsize rectsize rectsize]);
+m(:, :, 4) = imcrop(bogdan_grey, [801-rectsize 0 rectsize rectsize]);
+m(:, :, 5) = imcrop(bogdan_grey,centerCropWindow2d(size(bogdan_grey),[rectsize rectsize]));
+marked_bogdan = bogdan_grey;
+for i = 1:5
+    if mean(mean(m(:, :, i))) < 128
+        m(:, :, i) = 255;
+    else
+        m(:, :, i) = 0;
+    end
+end
+marked_bogdan(1:rectsize, 1:rectsize) = m(:, :, 1);
+marked_bogdan(1:rectsize, 801-rectsize:800) = m(:, :, 2);
+marked_bogdan(801-rectsize:800, 801-rectsize:800) = m(:, :, 3);
+marked_bogdan(801-rectsize:800, 1:rectsize) = m(:, :, 4);
+marked_bogdan(((801-rectsize)/2):((800+rectsize)/2), ((801-rectsize)/2):((800+rectsize)/2)) = m(:, :, 5);
+imwrite(marked_bogdan, 'Marks\marked_bogdan.jpg');
