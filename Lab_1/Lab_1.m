@@ -94,8 +94,8 @@ for i = 1:5
     end
 end
 marked_bogdan(1:rectsize, 1:rectsize) = m(:, :, 1);
-marked_bogdan(1:rectsize, 801-rectsize:800) = m(:, :, 2);
+marked_bogdan(801-rectsize:800, 1:rectsize) = m(:, :, 2);
 marked_bogdan(801-rectsize:800, 801-rectsize:800) = m(:, :, 3);
-marked_bogdan(801-rectsize:800, 1:rectsize) = m(:, :, 4);
+marked_bogdan(1:rectsize, 801-rectsize:800) = m(:, :, 4);
 marked_bogdan(((801-rectsize)/2):((800+rectsize)/2), ((801-rectsize)/2):((800+rectsize)/2)) = m(:, :, 5);
 imwrite(marked_bogdan, 'Marks\marked_bogdan.jpg');
