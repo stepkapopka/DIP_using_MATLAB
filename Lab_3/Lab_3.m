@@ -96,8 +96,8 @@ imshow(g3); title('Отфильтрованное изображение'); paus
 imwrite(g3, 'Filter/denoised.png');
 g4 = imbilatfilt(noisy);
 N = 800*800;
-D = sum((I-((1/N)*sum(I, 'all'))), 'all')/N;
-D1 = sum((g1-((1/N)*sum(g1, 'all'))), 'all')/N;
-D2 = sum((g2-((1/N)*sum(g2, 'all'))), 'all')/N;
-D3 = sum((g3-((1/N)*sum(g3, 'all'))), 'all')/N;
-D4 = sum((g4-((1/N)*sum(g4, 'all'))), 'all')/N;
+D = sum((I-((1/N)*sum(I, 'all'))).^2, 'all')/N;
+D1 = sum((g1-((1/N)*sum(g1, 'all'))).^2, 'all')/N;
+D2 = sum((g2-((1/N)*sum(g2, 'all'))).^2, 'all')/N;
+D3 = sum((g3-((1/N)*sum(g3, 'all'))).^2, 'all')/N;
+D4 = sum((g4-((1/N)*sum(g4, 'all'))).^2, 'all')/N;
