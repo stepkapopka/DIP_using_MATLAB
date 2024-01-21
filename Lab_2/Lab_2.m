@@ -96,7 +96,7 @@ imshow(dark_cropped_bg); title('Уменьшенная яркость'); pause;
 grey_cropped_bg = rgb2gray(dark_cropped_bg);
 grey_cropped_bg(tr) = 255;
 grey_cropped_bg(ellipse_perim) = 255;
-noise = imnoise2('exponential', 800, 800);
+noise = imnoise2('exponential', 800, 800, 5);
 grey_cropped_bg = im2double(grey_cropped_bg);
 noisyImage = grey_cropped_bg.*noise;
 imshow(noisyImage); pause;
@@ -111,7 +111,7 @@ imshow(negative); pause;
 grey_cropped_bg2 = rgb2gray(dark_cropped_bg);
 grey_cropped_bg2((round(size(obj1, 1)/2)-a):(round(size(obj1, 1)/2)+a), ...
     (round(size(obj1, 1)/2)-a):(round(size(obj1, 1)/2)+a)) = 255;
-noise = imnoise2('exponential', 800, 800);
+noise = imnoise2('exponential', 800, 800, 5);
 grey_cropped_bg2 = im2double(grey_cropped_bg2);
 noisyImage2 = grey_cropped_bg2.*noise;
 imshow(noisyImage2); pause;
