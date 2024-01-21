@@ -99,7 +99,7 @@ case 'exponential'
     if a <+ 0
         error('Parameter a must be positive for exponential type.')
     end
-    k = -l/a;
+    k = -1/a;
     R = k*log(1 - rand(M, N));
 case 'erlang'
     if nargin <= 3
