@@ -18,6 +18,7 @@ for D0 = [5 10 50 250]
     FFc = Fc.*H;
     FF = ifftshift(FFc);
     FI = real(ifft2(FF));
+    FI = uint8(abs(FI));
     imshow(FI, []); title(['Идеальный ФНЧ (D0 = ', num2str(D0), ')']); pause;
     imwrite(FI, ['Low/Ideal/' num2str(D0) '.png'])
 end
@@ -27,6 +28,7 @@ for D0 = [5 10 50 250]
     FFc = Fc.*H;
     FF = ifftshift(FFc);
     FI = real(ifft2(FF));
+    FI = uint8(abs(FI));
     imshow(FI, []); title(['Баттерворт ФНЧ (D0 = ', num2str(D0), ')']); pause;
     imwrite(FI, ['Low/Butter/' num2str(D0) '.png'])
 end
@@ -36,6 +38,7 @@ for D0 = [5 10 50 250]
     FFc = Fc.*H;
     FF = ifftshift(FFc);
     FI = real(ifft2(FF));
+    FI = uint8(abs(FI));
     imshow(FI, []); title(['Гаус ФНЧ (D0 = ', num2str(D0), ')']); pause;
     imwrite(FI, ['Low/Gaus/' num2str(D0) '.png'])
 end
@@ -46,6 +49,7 @@ for D0 = [5 10 50 250]
     FFc = Fc.*H;
     FF = ifftshift(FFc);
     FI = real(ifft2(FF));
+    FI = uint8(abs(FI));
     imshow(FI, []); title(['Идеальный ФВЧ (D0 = ', num2str(D0), ')']); pause;
     imwrite(FI, ['High/Ideal/' num2str(D0) '.png'])
 end
@@ -55,6 +59,7 @@ for D0 = [5 10 50 250]
     FFc = Fc.*H;
     FF = ifftshift(FFc);
     FI = real(ifft2(FF));
+    FI = uint8(abs(FI));
     imshow(FI, []); title(['Баттерворт ФВЧ (D0 = ', num2str(D0), ')']); pause;
     imwrite(FI, ['High/Butter/' num2str(D0) '.png'])
 end
@@ -64,6 +69,7 @@ for D0 = [5 10 50 250]
     FFc = Fc.*H;
     FF = ifftshift(FFc);
     FI = real(ifft2(FF));
+    FI = uint8(abs(FI));
     imshow(FI, []); title(['Гаус ФВЧ (D0 = ', num2str(D0), ')']); pause;
     imwrite(FI, ['High/Gaus/' num2str(D0) '.png'])
 end
